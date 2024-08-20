@@ -29,21 +29,25 @@ module.exports = function (nestpay) {
                     storetype: value.storetype || that.config.storetype,
                     lang: value.lang || that.config.lang,
                     processType: value.processType || that.config.processType,
+                    hashAlgorithm: "ver3",
                 },
                 url: that.config.endpoints3d[that.config.endpoint],
             };
 
-            const hashstr = [
-                data.form.clientId,
-                data.form.oid,
-                data.form.amount,
-                data.form.okUrl,
-                data.form.failUrl,
-                data.form.processType,
-                data.form.rnd,
-                value.storekey || that.config.storekey,
-            ].join("");
+            // Ensure the hash is calculated with all required parameters, sorted and joined by '|'
+            const sortedKeys = Object.keys(data.form).sort();
+            const hashstr =
+                sortedKeys
+                    .map((key) => {
+                        let value = data.form[key];
+                        value = value === undefined || value === null ? "" : String(value);
+                        return value;
+                    })
+                    .join("|") +
+                "|" +
+                (value.storekey || that.config.storekey);
 
+            // Hash using SHA-512 and Base64 encode it
             data.form.hash = crypto.createHash("sha512").update(hashstr).digest("base64");
 
             // if secure format is set

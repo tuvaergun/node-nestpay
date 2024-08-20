@@ -1,6 +1,6 @@
-# node-nestpay
+# node-nestpay-v3
 
-[![npm version](https://badge.fury.io/js/node-nestpay.svg)](https://badge.fury.io/js/node-nestpay)
+[![npm version](https://badge.fury.io/js/node-nestpay-v3.svg)](https://badge.fury.io/js/node-nestpay-v3)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
 A NodeJS module to interface with Nestpay Payment Gateway.
@@ -8,34 +8,34 @@ A NodeJS module to interface with Nestpay Payment Gateway.
 ## Installation
 
 ```
-npm install node-nestpay
+npm install node-nestpay-v3
 ```
 
 ## Methods
 
--  Purchase
--  Authorize
--  Capture
--  Void
--  Refund
--  Secure3d
--  SecurePurchase
--  SecureAuthorize
+-   Purchase
+-   Authorize
+-   Capture
+-   Void
+-   Refund
+-   Secure3d
+-   SecurePurchase
+-   SecureAuthorize
 
 ## Endpoints
 
--  İş Bankası
--  Akbank
--  Finansbank
--  Denizbank
--  Kuveytturk
--  Halkbank
--  Anadolubank
--  ING Bank
--  Citibank
--  Cardplus
--  Ziraat Bankası
--  Türk Ekonomi Bankası
+-   İş Bankası
+-   Akbank
+-   Finansbank
+-   Denizbank
+-   Kuveytturk
+-   Halkbank
+-   Anadolubank
+-   ING Bank
+-   Citibank
+-   Cardplus
+-   Ziraat Bankası
+-   Türk Ekonomi Bankası
 
 ## Initialization
 
@@ -53,19 +53,19 @@ nestpay = new nodeNestpay({
 
 **Options:**
 
--  name: Required,
--  password: Required,
--  clientId: Required,
--  storekey: Required for 3d,
--  callbackSuccess: Required for 3d,
--  callbackFail: Required for 3d,
--  mode: Default: 'P', 'T' for test,
--  currency: Default: 'USD', Any valid currency code,
--  orderId: Default: '', 'Auto' for random id by uuidv1,
--  secureFormat: Default: '', 'html' for html form.
--  storetype: Default: '3d',
--  endpoint: Default: 'asseco', Any valid endpoint name,
--  lang: Default: 'tr', Any valid language code for 3d screen
+-   name: Required,
+-   password: Required,
+-   clientId: Required,
+-   storekey: Required for 3d,
+-   callbackSuccess: Required for 3d,
+-   callbackFail: Required for 3d,
+-   mode: Default: 'P', 'T' for test,
+-   currency: Default: 'USD', Any valid currency code,
+-   orderId: Default: '', 'Auto' for random id by uuidv1,
+-   secureFormat: Default: '', 'html' for html form.
+-   storetype: Default: '3d',
+-   endpoint: Default: 'asseco', Any valid endpoint name,
+-   lang: Default: 'tr', Any valid language code for 3d screen
 
 ### Methods
 

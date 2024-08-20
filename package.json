@@ -1,13 +1,13 @@
 {
-    "name": "node-nestpay",
-    "version": "2.1.0",
+    "name": "node-nestpay-v3",
+    "version": "1.1.0",
     "author": "Yasin Ergün <tuvaergun@gmail.com>",
     "main": "index.js",
     "typings": "./node-nestpay.d.ts",
-    "description": "A NodeJS module to interface with Nestpay Payment Gateway.",
+    "description": "A Node.js wrapper for the NestPay V3 API",
     "repository": {
         "type": "git",
-        "url": "https://github.com/tuvaergun/node-nestpay.git"
+        "url": "https://github.com/tuvaergun/node-nestpay-v3.git"
     },
     "keywords": [
         "est",
@@ -17,6 +17,10 @@
         "turkey"
     ],
     "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/tuvaergun/node-nestpay-v3/issues"
+    },
+    "homepage": "https://github.com/tuvaergun/node-nestpay-v3#readme",
     "dependencies": {
         "body-parser": "^1.18.2",
         "currency-codes": "^1.1.2",

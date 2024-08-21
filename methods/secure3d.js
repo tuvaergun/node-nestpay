@@ -22,15 +22,15 @@ module.exports = function (nestpay) {
                     callbackUrl: value.callbackFail || that.config.callbackFail,
                     currency: currencyNumber,
                     rnd: value.timestamp || new Date().getTime(),
-                    storeType: value.storetype || that.config.storetype,
+                    storetype: value.storetype || that.config.storetype,
                     storeKey: value.storekey || that.config.storekey,
                     lang: value.lang || that.config.lang,
                     hashAlgorithm: "ver3",
                     BillToName: "name",
-                    BillTocompany: "billToCompany",
+                    BillToCompany: "billToCompany",
                     refreshTime: 5,
                     oid: order,
-                    pan: value.number || "",
+                    pan: (value.number || "").replace(/\s+/g, ""),
                     Ecom_Payment_Card_ExpDate_Year: value.year || "",
                     Ecom_Payment_Card_ExpDate_Month: value.month || "",
                     cv2: value.cvv || "",
@@ -43,21 +43,44 @@ module.exports = function (nestpay) {
             console.log("data:", data.form);
 
             // Belirtilen parametrelerin sıralı bir dizisini oluştur
-            const requiredKeys = ["amount", "callbackUrl", "clientid", "currency", "failUrl", "hashAlgorithm", "lang", "okurl", "refreshtime", "rnd", "storeType", "TranType"];
-
-            // Belirtilen parametreleri | ile birleştir
             const hashstr =
-                requiredKeys
-                    .map((key) => {
-                        let value = data.form[key];
-                        value = value === undefined || value === null ? "" : String(value);
-                        return value;
-                    })
-                    .join("|") +
+                data.form.amount +
+                "|" +
+                data.form.BillToCompany +
+                "|" +
+                data.form.BillToName +
+                "|" +
+                data.form.callbackUrl +
+                "|" +
+                data.form.clientId +
+                "|" +
+                data.form.currency +
+                "|" +
+                data.form.cv2 +
+                "|" +
+                data.form.Ecom_Payment_Card_ExpDate_Month +
+                "|" +
+                data.form.Ecom_Payment_Card_ExpDate_Year +
+                "|" +
+                data.form.failUrl +
+                "|" +
+                data.form.hashAlgorithm +
+                "|" +
+                data.form.lang +
+                "|" +
+                data.form.oid +
+                "|" +
+                data.form.okUrl +
+                "|" +
+                data.form.pan +
+                "|" +
+                data.form.rnd +
+                "|" +
+                data.form.storetype +
                 "|" +
                 (data.form.storeKey || that.config.storekey);
 
-            console.log("hashstr", hashstr);
+            console.log("hash str:", hashstr);
 
             // SHA-512 algoritması ile hashleyin ve Base64 ile kodlayın
             data.form.hash = crypto.createHash("sha512").update(hashstr).digest("base64");

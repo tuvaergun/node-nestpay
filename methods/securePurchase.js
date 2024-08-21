@@ -14,32 +14,18 @@ module.exports = function (nestpay) {
                 Name: that.config.name,
                 Password: that.config.password,
                 ClientId: that.config.clientId,
-                Mode: that.config.mode,
-                Type: "Auth",
-                Currency: currencyNumber,
-                Taksit: value.installment || undefined,
                 OrderId: value.orderId ? value.orderId : value.oid,
                 GroupId: value.groupId || "",
-                TransId: value.transId || "",
-                UserId: value.userId || "",
-                Total: value.amount || "",
-                CardholderPresentCode: "13", //
+                Type: "Auth",
+                Number: value.md,
+                PayerAuthenticationCode: value.cavv,
+                PayerSecurityLevel: value.eci,
+                PayerTxnId: value.xid,
+                Currency: currencyNumber,
             };
-            var sha = crypto
-                .createHash("sha512")
-                .update(value.HASHPARAMSVAL + (value.storekey || that.config.storekey))
-                .digest("base64");
-            if (sha != value.HASH) {
-                reject("invalid hash");
-            } else {
-                data.Number = value.md;
-                data.PayerTxnId = value.xid;
-                data.PayerSecurityLevel = value.eci;
-                data.PayerAuthenticationCode = value.cavv;
 
-                var url = that.config.endpoints[that.config.endpoint];
-                that.request(url, data).then(resolve).catch(reject);
-            }
+            var url = that.config.endpoints[that.config.endpoint];
+            that.request(url, data).then(resolve).catch(reject);
         });
     };
 };

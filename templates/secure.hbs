@@ -4,12 +4,8 @@
         <form id="nestPay3d" method="post" action="{{url}}">
             <!--clientId-->
             <input type="hidden" name="clientid" value="{{form.clientId}}" />
-            <!--storetype-->
-            <input type="hidden" name="storetype" value="{{form.storeType}}" />
             <!--hash-->
             <input type="hidden" name="hash" value="{{form.hash}}" />
-            <!--processType (islemtipi)-->
-            <input type="hidden" name="islemtipi" value="{{form.processType}}" />
             <!--amount-->
             <input type="hidden" name="amount" value="{{form.amount}}" />
             <!--currency-->
@@ -20,8 +16,8 @@
             <input type="hidden" name="okUrl" value="{{form.okUrl}}" />
             <!--failUrl-->
             <input type="hidden" name="failUrl" value="{{form.failUrl}}" />
-            <!--lang-->
-            <input type="hidden" name="lang" value="{{form.lang}}" />
+            <!--callbackUrl-->
+            <input type="hidden" name="callbackUrl" value="{{form.callbackUrl}}" />
             <!--rnd-->
             <input type="hidden" name="rnd" value="{{form.rnd}}" />
             <!--pan-->
@@ -34,6 +30,10 @@
             <input type="hidden" name="cv2" value="{{form.cv2}}" size="4" />
             <!--hashAlgorithm-->
             <input type="hidden" name="hashAlgorithm" value="ver3" />
+            <input type="hidden" name="storetype" value="3d" />
+            <input type="hidden" name="lang" value="tr" />
+            <input type="hidden" name="BillToName" value="name" />
+            <input type="hidden" name="BillToCompany" value="billToCompany" />
         </form>
         <script type="text/javascript">
             document.getElementById('nestPay3d').submit();

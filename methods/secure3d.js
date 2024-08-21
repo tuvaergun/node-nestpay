@@ -16,28 +16,38 @@ module.exports = function (nestpay) {
             var data = {
                 form: {
                     clientId: that.config.clientId,
-                    oid: order,
                     amount: value.amount || "",
                     okUrl: value.callbackSuccess || that.config.callbackSuccess,
                     failUrl: value.callbackFail || that.config.callbackFail,
-                    rnd: value.timestamp || new Date().getTime(),
+                    callbackUrl: value.callbackFail || that.config.callbackFail,
                     currency: currencyNumber,
+                    rnd: value.timestamp || new Date().getTime(),
+                    storeType: value.storetype || that.config.storetype,
+                    storeKey: value.storekey || that.config.storekey,
+                    lang: value.lang || that.config.lang,
+                    hashAlgorithm: "ver3",
+                    BillToName: "name",
+                    BillTocompany: "billToCompany",
+                    refreshTime: 5,
+                    oid: order,
                     pan: value.number || "",
                     Ecom_Payment_Card_ExpDate_Year: value.year || "",
                     Ecom_Payment_Card_ExpDate_Month: value.month || "",
                     cv2: value.cvv || "",
-                    storetype: value.storetype || that.config.storetype,
-                    lang: value.lang || that.config.lang,
                     processType: value.processType || that.config.processType,
-                    hashAlgorithm: "ver3",
+                    TranType: "Auth",
                 },
                 url: that.config.endpoints3d[that.config.endpoint],
             };
 
-            // Ensure the hash is calculated with all required parameters, sorted and joined by '|'
-            const sortedKeys = Object.keys(data.form).sort();
+            console.log("data:", data.form);
+
+            // Belirtilen parametrelerin sıralı bir dizisini oluştur
+            const requiredKeys = ["amount", "callbackUrl", "clientid", "currency", "failUrl", "hashAlgorithm", "lang", "okurl", "refreshtime", "rnd", "storeType", "TranType"];
+
+            // Belirtilen parametreleri | ile birleştir
             const hashstr =
-                sortedKeys
+                requiredKeys
                     .map((key) => {
                         let value = data.form[key];
                         value = value === undefined || value === null ? "" : String(value);
@@ -45,10 +55,14 @@ module.exports = function (nestpay) {
                     })
                     .join("|") +
                 "|" +
-                (value.storekey || that.config.storekey);
+                (data.form.storeKey || that.config.storekey);
 
-            // Hash using SHA-512 and Base64 encode it
+            console.log("hashstr", hashstr);
+
+            // SHA-512 algoritması ile hashleyin ve Base64 ile kodlayın
             data.form.hash = crypto.createHash("sha512").update(hashstr).digest("base64");
+
+            console.log("hash", data.form.hash);
 
             // if secure format is set
             if (value.secureFormat === "html" || that.config.secureFormat === "html") {

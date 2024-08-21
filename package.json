@@ -1,6 +1,6 @@
 {
     "name": "node-nestpay-v3",
-    "version": "1.1.5",
+    "version": "1.1.8",
     "author": "Yasin Ergün <tuvaergun@gmail.com>",
     "main": "index.js",
     "typings": "./node-nestpay.d.ts",
